@@ -1,0 +1,11 @@
+node_modules/
+dist/
+stats.html
+.env
+.env.*
+.DS_Store
+*.log
+release/
+artifacts/
+.verification/
+node_modules/.vite/

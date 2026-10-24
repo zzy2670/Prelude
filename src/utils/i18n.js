@@ -1,0 +1,108 @@
+import { ref } from 'vue'
+
+export const locale = ref('zh-CN')
+
+const english = {
+  productName: 'Prelude',
+  '序页': 'Prelude',
+  '设置': 'Settings',
+  '隐藏页面': 'Hide page',
+  '演示数据': 'Demo data',
+  '返回原页面': 'Return to original page',
+  '打开图片原网址': 'Open original image URL',
+  '图片原网址：{name}': 'Original image URL: {name}',
+  '简体中文': 'Simplified Chinese',
+  '一键打开': 'Open all',
+  '关闭设置': 'Close settings',
+  '语言': 'Language',
+  '壁纸切换间隔（分钟）': 'Wallpaper interval (minutes)',
+  '立即更换': 'Change now',
+  '背景亮度 {value}%': 'Background brightness {value}%',
+  '卡片不透明度 {value}%': 'Card opacity {value}%',
+  '壁纸下载文件夹': 'Wallpaper download folder',
+  'Chrome 下载目录 / 壁纸收藏': 'Chrome downloads / Saved wallpapers',
+  '选择默认文件夹': 'Choose default folder',
+  '恢复浏览器下载目录': 'Use browser download folder',
+  '壁纸来源：Unsplash': 'Wallpaper source: Unsplash',
+  '无法读取网页快捷方式。': 'Could not read this web shortcut.',
+  '网页快捷方式中没有有效的网页地址。': 'The shortcut does not contain a valid website address.',
+  '双击修改标题': 'Double-click to edit title',
+  '删除卡片': 'Delete card',
+  '取消置顶': 'Unpin',
+  '置顶': 'Pinned',
+  '置顶操作': 'Pin',
+  '删除第 {row} 行': 'Delete row {row}',
+  '删除当前行': 'Delete this row',
+  '双击修改分组名称': 'Double-click to rename group',
+  '删除分组': 'Delete group',
+  '新分组': 'New group',
+  '当前窗口标签页副本': 'Tabs in this window',
+  '已打开的标签页': 'Open tabs',
+  '新标签页': 'New tab',
+  '拖到下方分组添加卡片': 'Drag into a group below to add a card',
+  '正在播放音频': 'Playing audio',
+  '关闭标签页：{title}': 'Close tab: {title}',
+  '关闭标签页': 'Close tab',
+  '收藏壁纸': 'Saved wallpapers',
+  '{count} 张': '{count} images',
+  '下载中': 'Downloading',
+  '全部下载': 'Download all',
+  '关闭相册': 'Close album',
+  '收藏的壁纸': 'Saved wallpaper',
+  '图片加载中': 'Loading image',
+  '下载壁纸：{name}': 'Download wallpaper: {name}',
+  '下载壁纸': 'Download wallpaper',
+  '还没有收藏的壁纸': 'No saved wallpapers yet',
+  '页面操作': 'Page actions',
+  '收藏当前壁纸': 'Save current wallpaper',
+  '取消收藏当前壁纸': 'Unsave current wallpaper',
+  '已取消收藏壁纸': 'Wallpaper removed from your collection',
+  '取消收藏失败': 'Could not remove the wallpaper from your collection',
+  '删除收藏壁纸': 'Remove saved wallpaper',
+  '删除收藏壁纸：{name}': 'Remove saved wallpaper: {name}',
+  '壁纸相册': 'Wallpaper album',
+  '卡片分组': 'Card groups',
+  '请输入有效的网址': 'Enter a valid website address',
+  '请先创建分组': 'Create a group first',
+  '这个位置已经有卡片': 'This position already has a card',
+  '背景暂时无法更新': 'The wallpaper cannot be updated right now',
+  '数据加载失败': 'Could not load your data',
+  '这张壁纸已收藏': 'This wallpaper is already saved',
+  '壁纸已收藏': 'Wallpaper saved to your collection',
+  '收藏失败': 'Could not save the wallpaper',
+  '壁纸已保存': 'Wallpaper downloaded',
+  '下载失败': 'Download failed',
+  '已保存 {count} 张，{failed} 张失败': 'Saved {count} images; {failed} failed',
+  '已保存全部 {count} 张壁纸': 'Saved all {count} wallpapers',
+  '删除“{title}”及其中 {count} 张卡片？': 'Delete “{title}” and its {count} cards?',
+  '壁纸地址无效。': 'The wallpaper address is invalid.',
+  '只能收藏 Bonjourr 素材源中的 Unsplash 壁纸。': 'Only Unsplash wallpapers from the Bonjourr collection can be saved.',
+  '当前浏览器无法使用本地壁纸收藏。': 'This browser cannot store a local wallpaper collection.',
+  '无法打开本地壁纸收藏。': 'Could not open the local wallpaper collection.',
+  '壁纸收藏正在其他页面升级，请关闭旧页面后重试。': 'The wallpaper collection is being updated in another page. Close older pages and try again.',
+  '本地壁纸收藏操作失败。': 'The local wallpaper operation failed.',
+  '本地壁纸收藏操作已中止。': 'The local wallpaper operation was canceled.',
+  '壁纸下载失败（{status}）。': 'Wallpaper download failed ({status}).',
+  '素材源没有返回有效图片，尚未收藏。': 'The source did not return a valid image. It has not been saved.',
+  '当前浏览器不支持选择默认文件夹；下载将使用 Chrome 的默认下载位置。': 'This browser does not support choosing a default folder. Downloads will use Chrome’s default location.',
+  '已取消选择文件夹。': 'Folder selection canceled.',
+  '无法选择文件夹，请在浏览器允许访问后重试。': 'Could not choose the folder. Allow access in the browser and try again.',
+  '未找到这张壁纸的收藏记录。': 'This wallpaper was not found in the collection.',
+  '本地壁纸文件不可用，请重新收藏。': 'The local wallpaper file is unavailable. Save it to the collection again.',
+  '尚未允许写入收藏文件夹，请授权或清除默认文件夹后使用 Chrome 下载。': 'Writing to the selected folder is not allowed. Grant access, or clear the default folder to use Chrome downloads.',
+  '当前浏览器无法后台下载文件，请选择可写入的默认文件夹。': 'This browser cannot download files in the background. Choose a writable default folder.',
+  '下载失败。': 'Download failed.'
+}
+
+const chinese = { productName: '序页', '置顶操作': '置顶' }
+
+export function setLocale(language) {
+  locale.value = String(language || '').toLowerCase().startsWith('en') ? 'en' : 'zh-CN'
+  return locale.value
+}
+
+export function t(key, parameters = {}) {
+  const dictionary = locale.value === 'en' ? english : chinese
+  const message = dictionary[key] ?? key
+  return String(message).replace(/\{([^{}]+)\}/g, (match, name) => Object.hasOwn(parameters, name) ? String(parameters[name]) : match)
+}

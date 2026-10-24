@@ -1,0 +1,52 @@
+name: Publish Chrome and Edge packages
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Verify version tag
+        run: node --input-type=module -e "import fs from 'node:fs';const version=JSON.parse(fs.readFileSync('public/manifest.json','utf8')).version;const packageVersion=JSON.parse(fs.readFileSync('package.json','utf8')).version;const normalized=v=>v.split('.').concat(['0','0','0','0']).slice(0,4).join('.');if(process.env.GITHUB_REF_NAME!=='v'+version||normalized(version)!==normalized(packageVersion))throw new Error('Tag does not match extension version');"
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm test
+      - run: npm run build
+      - run: node scripts/package-extensions.mjs
+      - name: Publish packages and checksums
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if existing_draft=$(gh release view "$GITHUB_REF_NAME" --json isDraft --jq '.isDraft' 2>/dev/null); then
+            if [[ "$existing_draft" != "true" ]]; then
+              echo 'This version is already public; its assets will not be overwritten.'
+              exit 1
+            fi
+          else
+            notes=(--generate-notes)
+            if [[ -f .github/RELEASE_NOTES.md ]]; then
+              notes=(--notes-file .github/RELEASE_NOTES.md)
+            fi
+            gh release create "$GITHUB_REF_NAME" --draft --verify-tag --title "序页 · Prelude $GITHUB_REF_NAME" "${notes[@]}"
+          fi
+          version="${GITHUB_REF_NAME#v}"
+          gh release upload "$GITHUB_REF_NAME" "release/Prelude-$version-Chrome.zip" "release/Prelude-$version-Edge.zip" release/SHA256SUMS.txt release/LICENSE --clobber
+          gh release edit "$GITHUB_REF_NAME" --draft=false --latest
+
